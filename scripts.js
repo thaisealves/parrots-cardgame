@@ -8,14 +8,14 @@ function numCard(){
     console.log(list)
     for (let i = 0; i < Number(quantity); i++){
         list.innerHTML += 
-        `<button onclick="hideFront(this)" class="card-front">
-            <img src="/images/front.png">
+        `<button onclick="hideFront(this)" >
+            <img src="/images/front.png" class="card card-front">
+            
         </button>`
     }
 }
 numCard()
 
 function hideFront(element){
-    element.classList.add("hide-front")
-
+    element.classList.toggle("hide-front")
 }
