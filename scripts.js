@@ -8,8 +8,8 @@ function numCard() {
     console.log(list)
     for (let i = 0; i < Number(quantity); i++) {
         list.innerHTML +=
-        `<button class="card" onclick="hideFront(this)">
-        <div >
+       `<button class="card">
+        <div class="into-card" onclick="hideFront(this)" >
             <div  class="card-front">
             <img src="/images/front.png">
             </div>
@@ -18,14 +18,14 @@ function numCard() {
             <img src="/images/metalparrot.gif" >
             </div>
         </div>
-        </button>           
+           </button>     
         `
     }
 }
 numCard()
 
 function hideFront(element) {
-    element.classList.add("hide-front")
+    element.classList.toggle("flipped")
 
 
 }

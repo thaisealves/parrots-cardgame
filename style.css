@@ -33,14 +33,27 @@ body {
 .cards button {
     height: 146px;
     width: 117px;
-    position: relative;
+
     background-color: #ffffff00;
     border: none;
     border-radius: 5px;
     margin: 0 17px 34px 17px;
+    
 }
 
+.cards div{
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    position: relative;
+    
+}
 
+.into-card.flipped{
+    transform: rotateY(180deg);
+}
 
 .cards button div div {
     
@@ -57,21 +70,12 @@ body {
     border: 1px solid #99cea8;
     border-radius: 5px;
     backface-visibility: hidden;
-    transition: all .5s;
-    transform-style: preserve-3d;
+  
 }
 
 .card-back {
 
     transform: rotateY(180deg);
-}
-
-.card:hover .card-back {
-    transform: rotateY(0deg);
-}
-
-.card:hover .card-front {
-    transform: rotateY(-180deg);
 }
 
 
