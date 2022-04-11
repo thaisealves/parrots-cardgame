@@ -24,7 +24,7 @@ body {
 }
 
 .cards {
-    width: 85%;
+    width: 1000px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -128,4 +128,12 @@ body {
         border-radius: 9px;
         border: 2px solid #515830;
     }
+
+.cards {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  
+}
 }
