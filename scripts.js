@@ -1,4 +1,5 @@
 let quantity = prompt("Com quantas cartas você quer jogar? (4 a 14)");
+
 while (Number(quantity) < 4 || Number(quantity) > 14 || Number(quantity) % 2 !== 0) {
     quantity = prompt("Seu número deve ser par e entre 4 e 14");
 }
@@ -6,6 +7,7 @@ while (Number(quantity) < 4 || Number(quantity) > 14 || Number(quantity) % 2 !==
 let turned = [];
 let clicked = [];
 let turnedImg;
+let count = 0;
 
 // putting the names twice so we can have te PAIR of cards we want, it has to always be in pairs so the memory game makes sense... source from the back of the cards
 let backs = ["images/parrot1", "images/parrot1", "images/parrot2", "images/parrot2", "images/parrot3", "images/parrot3", "images/parrot4", "images/parrot4", "images/parrot5", "images/parrot5",
@@ -42,30 +44,61 @@ function numCard() {
 }
 numCard()
 
-
-
 function hideFront(element) {
-    element.classList.add("flipped")
+    count++;   //counting the amount of clicks
 
-    turned.push(element.parentNode.innerHTML)
-  
-    clicked.push(element)
-    
+    // if i've only turned 2 cards, this will happen: flipping the card and putting it in the array
+    if (count <= 2) {
+        element.classList.add("flipped")
+        turned.push(element.parentNode.innerHTML)
+        clicked.push(element)
+    }
+
     let imgTurned2 = (turned[turned.length - 2])
     let imgTurned = (turned[turned.length - 1])
 
+    if (count === 2) {
 
-    if (turned.length - 2 >= 0 && imgTurned !== imgTurned2 && clicked.length%2 === 0) {
+        if (turned.length - 2 >= 0 && imgTurned !== imgTurned2 && clicked.length % 2 === 0) {
 
-        setTimeout(function () { 
-        clicked[clicked.length-1].classList.remove("flipped")
-        clicked[clicked.length-2].classList.remove("flipped")
+            setTimeout(function () {
+                clicked[clicked.length - 1].classList.remove("flipped")
+                clicked[clicked.length - 2].classList.remove("flipped")
+                count = 0;
+            }, 1000)
 
-    }, 1000)
+        }
+        else {
+            setTimeout(function () {
+                count = 0;
+            }, 100)
+        }
     }
-    if ((document.querySelectorAll(".flipped").length) === Number(quantity)){
-        alert (`Você ganhou em ${(clicked.length)} jogadas!`)
+     if ((document.querySelectorAll(".flipped").length) === Number(quantity)) {
+         setTimeout(function (){alert(`Você ganhou em ${(clicked.length)} jogadas e em ${time} segundos!`)
+         let ans = prompt("Você quer jogar de novo? (sim ou não)");
+        while (ans !== "sim" && ans !== "não") {
+            ans = prompt("A resposta precisa ser escrita como 'sim' ou 'não'");
+            
+        }
+        if (ans === "sim") {
+            window.location.reload();
+        }
+        else if (ans === "não") {
+            clearInterval(interval);
+            alert("Poxaaa, que pena... Te espero na próxima")
+        }
+        }, 500)
     }
+   
 }
 
 
+// bonus timer part
+let time = 0;
+let interval = setInterval(counting, 1000)
+
+function counting() {
+    time++;
+    document.querySelector(".timer").innerHTML = time + "s";
+}
