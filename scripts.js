@@ -4,19 +4,12 @@ while (Number(quantity) < 4 || Number(quantity) > 14 || Number(quantity) % 2 !==
 }
 
 let turned = [];
+let clicked = [];
 let turnedImg;
 
 // putting the names twice so we can have te PAIR of cards we want, it has to always be in pairs so the memory game makes sense... source from the back of the cards
 let backs = ["images/parrot1", "images/parrot1", "images/parrot2", "images/parrot2", "images/parrot3", "images/parrot3", "images/parrot4", "images/parrot4", "images/parrot5", "images/parrot5",
     "images/parrot6", "images/parrot6", "images/parrot7", "images/parrot7"]
-
-// for (let j = 1; j < 8; j++) {
-//     let imgs = [{
-//         name: `parrot${j}`,
-//         source: `images/parrot${j}.gif`
-//     }]
-//     console.log(imgs)
-// }
 
 //"cutting" from the first indice till it gets the number we passed on the quantity
 let cardsShuffle = backs.slice(0, quantity);
@@ -49,22 +42,17 @@ function numCard() {
 }
 numCard()
 
-let clicked = [];
+
 
 function hideFront(element) {
     element.classList.add("flipped")
 
     turned.push(element.parentNode.innerHTML)
-    console.log(turned)
+  
     clicked.push(element)
-    console.log(clicked)
-
-
+    
     let imgTurned2 = (turned[turned.length - 2])
     let imgTurned = (turned[turned.length - 1])
-
-    console.log(imgTurned)
-    console.log(imgTurned2)
 
 
     if (turned.length - 2 >= 0 && imgTurned !== imgTurned2 && clicked.length%2 === 0) {
@@ -75,7 +63,9 @@ function hideFront(element) {
 
     }, 1000)
     }
-
-    // se as cartas não foram iguais, remove("flipped"), tirar o toggle e deixar só o add 
-
+    if ((document.querySelectorAll(".flipped").length) === Number(quantity)){
+        alert (`Você ganhou em ${(clicked.length)} jogadas!`)
+    }
 }
+
+
